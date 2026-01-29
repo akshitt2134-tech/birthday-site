@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(circle at top, #ff758c, #ff7eb3);
+    height: 100vh;
+    overflow: hidden;
+    color: white;
+    text-align: center;
+  }
+
+  .screen {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.95);
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    animation: glow 2s infinite alternate;
+  }
+
+  p {
+    font-size: 1.15rem;
+    max-width: 330px;
+    line-height: 1.5;
+  }
+
+  button {
+    margin-top: 25px;
+    padding: 14px 34px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    background: white;
+    color: #ff4e7a;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    transition: transform 0.2s ease;
+  }
+
+  button:hover {
+    transform: scale(1.08);
+  }
+
+  .card {
+    background: rgba(255,255,255,0.18);
+    padding: 30px;
+    border-radius: 25px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    animation: pop 0.6s ease;
+  }
+
+  img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid white;
+    margin-bottom: 15px;
+  }
+
+  /* Hearts */
+  .heart {
+    position: absolute;
+    bottom: -20px;
+    font-size: 20px;
+    animation: floatUp 6s linear forwards;
+    opacity: 0.9;
+  }
+
+  @keyframes floatUp {
+    to {
+      transform: translateY(-110vh);
+      opacity: 0;
+    }
+  }
+
+  @keyframes glow {
+    from { text-shadow: 0 0 10px #fff; }
+    to { text-shadow: 0 0 25px #fff; }
+  }
+
+  @keyframes pop {
+    from { transform: scale(0.7); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  .confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: -10px;
+    animation: fall 4s linear forwards;
+  }
+
+  @keyframes fall {
+    to {
+      transform: translateY(110vh) rotate(720deg);
+      opacity: 0;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- 🔊 MUSIC -->
+<audio id="bgMusic" >
+  <!-- 🔁 REPLACE with your music file -->
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- SCREEN 1 -->
+<div class="screen" id="screen1">
+  <h1> Heyy !!🧣❄️</h1>
+  <p>Someone made something special just for you… 💝</p>
+  <button onclick="next1()">Tap to Begin ✨</button>
+</div>
+
+<!-- SCREEN 2 -->
+<div class="screen hidden" id="screen2">
+  <div class="card">
+    <!-- 🖼️ REPLACE image -->
+    <img src="suhaaa.jpg" alt="Suhani">
+
+    <!-- ✏️ REPLACE NAME -->
+    <h1>Happy Birthday<br> <span id="name">Suhanii 🩷❄️</span> </h1>
+
+    <p>
+      May today bring smiles, warmth,  
+      and memories you’ll always cherish 💖
+    </p>
+
+    <button onclick="next2()">One More Surprise 🎁</button>
+  </div>
+</div>
+
+<!-- SCREEN 3 – LOVE NOTE -->
+<div class="screen hidden" id="screen3">
+  <div class="card">
+    <h1>Just One Last💌</h1>
+    <p>
+      Suhani❄️🧣,
+Akshit believes in your dreams, your strength, and your future.
+May life always choose you back 🌸
+    </p>
+    <button onclick="celebrate()"> click mee naa suhani😋🩷</button>
+  </div>
+</div>
+
+<script>
+  const music = document.getElementById("bgMusic");
+
+  function next1() {
+    music.play();
+    document.getElementById("screen1").classList.add("hidden");
+    document.getElementById("screen2").classList.remove("hidden");
+  }
+
+  function next2() {
+    document.getElementById("screen2").classList.add("hidden");
+    document.getElementById("screen3").classList.remove("hidden");
+  }
+
+  function celebrate() {
+    createHearts();
+    createConfetti();
+  }
+
+  function createHearts() {
+    for (let i = 0; i < 25; i++) {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.textContent = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = 4 + Math.random() * 3 + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 7000);
+    }
+  }
+
+  function createConfetti() {
+    for (let i = 0; i < 50; i++) {
+      const conf = document.createElement("div");
+      conf.className = "confetti";
+      conf.style.left = Math.random() * 100 + "vw";
+      conf.style.background = `hsl(${Math.random()*360},100%,70%)`;
+      conf.style.animationDuration = 3 + Math.random() * 2 + "s";
+      document.body.appendChild(conf);
+      setTimeout(() => conf.remove(), 6000);
+    }
+  }
+</script>
+
+</body>
+</html>
